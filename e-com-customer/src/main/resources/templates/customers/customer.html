@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="ISO-8859-1">
+<title>Core E-Com Application</title>
+
+<script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" />
+<link href="../static/css/spring-core.css"
+	th:href="@{css/spring-core.css}" rel="stylesheet" media="screen" />
+
+</head>
+
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6">
+				<h2>Show Customer</h2>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-8">
+				<table class="table table-striped">
+					<tr>
+						<th>Id</th>
+						<td>
+							<p class="form-control-static" th:text="${customer.id}">
+								Customer Id</p>
+						</td>
+					</tr>
+					<tr>
+						<th>First Name</th>
+						<td>
+							<p class="form-control-static" th:text="${customer.firstName}">
+								First Name</p>
+						</td>
+					</tr>
+					<tr>
+						<th>Last Name</th>
+						<td>
+							<p class="form-control-static" th:text="${customer.lastName}">
+								Last Name</p>
+						</td>
+					</tr>
+					<tr>
+						<th> Email </th>
+						<td>
+							<p class="form-control-static" th:text="${customer.email}">
+								Email</p>
+						</td>
+					</tr>
+					
+					<tr>
+						<th> Phone Number </th>
+						<td>
+							<p class="form-control-static" th:text="${customer.phoneNumber}">
+								Phone Number</p>
+						</td>
+					</tr>
+				</table>
+				<table class="table table-striped">
+					<tr>
+						<th>Address Line 1</th>
+						<td>
+							<p class="form-control-static" th:text="${customer.address.getAddressLine1()}">
+								Address Line 1</p>
+						</td>
+					</tr>
+					<tr>
+						<th>Address Line 2</th>
+						<td>
+							<p class="form-control-static" th:text="${customer.address.getAddressLine2()}">
+								Address Line 2</p>
+						</td>
+					</tr>
+					<tr>
+						<th>City</th>
+						<td>
+							<p class="form-control-static" th:text="${customer.address.getCity()}">
+								City</p>
+						</td>
+					</tr>
+					<tr>
+						<th>State</th>
+						<td>
+							<p class="form-control-static" th:text="${customer.address.getState()}">
+								State</p>
+						</td>
+					</tr>
+					<tr>
+						<th> Zip Code </th>
+						<td>
+							<p class="form-control-static" th:text="${customer.address.getZipCode()}">
+								Zip Code </p>
+						</td>
+					</tr>
+					
+				</table>
+			</div>
+		</div>
+		<div> <a href="/customer">Show All Customers</a></div>
+	</div>
+</body>
+</html>

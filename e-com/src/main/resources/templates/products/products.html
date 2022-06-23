@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="ISO-8859-1">
+<title>Core E-Com Application</title>
+
+<script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" />
+<link href="../static/css/spring-core.css"
+	th:href="@{css/spring-core.css}" rel="stylesheet" media="screen" />
+
+</head>
+
+<body>
+	<div class="container">
+		<div th:if="${not #lists.isEmpty(products)}"></div>
+		<h2>List Products</h2>
+		<table class="table table-striped">
+			<tr>
+				<th>Id</th>
+				<th>Description</th>
+				<th>Price</th>
+				<th>Image URL</th>
+				<th></th>
+				<th></th>
+				<th></th>
+			</tr>
+			<tr th:each="product : ${products}">
+				<th th:text="${product.id}"></th>
+				<th th:text="${product.description}"></th>
+				<th th:text="${product.price}"></th>
+				<th th:text="${product.imageUrl}"></th>
+				<th><a th:href="${'/product/'+product.id}">View Product</a></th>
+				<th><a th:href="${'/product/edit/'+product.id}">Update Product</a></th>
+				<th><a th:href="${'/product/delete/'+product.id}">Delete Product</a></th>
+			</tr>
+		</table>
+		<a th:href="${'/product/new'}">Add New Product</a>
+	</div>
+</body>
+</html>

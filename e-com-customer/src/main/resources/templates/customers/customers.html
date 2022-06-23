@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="ISO-8859-1">
+<title>Core E-Com Application</title>
+
+<script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" />
+<link href="../static/css/spring-core.css"
+	th:href="@{css/spring-core.css}" rel="stylesheet" media="screen" />
+
+</head>
+
+<body>
+	<div class="container">
+		<div th:if="${not #lists.isEmpty(customers)}"></div>
+		<h2>List Customers</h2>
+		<table class="table table-striped">
+			<tr>
+				<th>Id</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Email</th>
+				<th>Phone Number</th>
+				<th>Address</th>
+			</tr>
+			<tr th:each="customer : ${customers}">
+				<th th:text="${customer.id}"></th>
+				<th th:text="${customer.firstName}"></th>
+				<th th:text="${customer.lastName}"></th>
+				<th th:text="${customer.email}"></th>
+				<th th:text="${customer.phoneNumber}"></th>
+				<th th:text="${customer.address}"></th>
+				<th><a th:href="${'/customer/'+customer.id}">View Customer</a></th>
+				<th><a th:href="${'/customer/edit/'+customer.id}">Update Customer</a></th>
+				<th><a th:href="${'/customer/delete/'+customer.id}">Delete Customer</a></th>
+			</tr>
+		</table>
+		<a th:href="${'/customer/new'}">Add New Customer</a>
+	</div>
+</body>
+</html>
