@@ -1,0 +1,11 @@
+<div class="topnav">
+    <a (click)="logout()">Logout</a>
+    <a href="/cart">Cart</a>
+    <select name="category" id="category" (change)="search($event.target.value)">
+        <option disabled selected>Category</option>
+        <option value="electronics">Electronics</option>
+        <option value="travel">Travel</option>
+        <option value="footwear">Footwear</option>
+    </select>
+    <a href="">Home</a>
+</div>

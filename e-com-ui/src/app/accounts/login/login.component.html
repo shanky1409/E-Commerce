@@ -1,0 +1,21 @@
+<div class='body'>
+    <div class="center">
+        <p class='appname'>E-Com Application</p>
+    </div>
+    <div class="login-page">
+        <div class="form">
+            <label>Login</label>
+            <div class="login-form">
+                <input type="text" [(ngModel)]='username'  placeholder="username" name="loginUsername" id="loginUsername" />
+                <input type="password" [(ngModel)]='password' placeholder="password" name="loginPassword" id="loginPassword"/>
+                <button (click)='login()' name="loginBtn" id="loginBtn">login</button>
+                <button (click)='onReset()'>Reset</button>
+                <p class="errorMessage">{{message}}</p>
+            </div>
+            <div><p>Don't have an account? <a href="/signup">Signup</a></p></div>
+        </div>
+    </div>
+</div>
+<div style="display:none">
+    <app-customer></app-customer>
+</div>

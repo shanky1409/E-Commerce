@@ -1,0 +1,32 @@
+<app-topnav></app-topnav>
+<div *ngIf="isEmpty">
+    <h2>Cart is empty</h2>
+</div>
+<div *ngIf="!isEmpty">
+    <button (click)="emptyCart()" class="btn">Empty Cart</button>
+    <table>
+        <thead>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+        </thead>
+        <tbody *ngFor="let product of products;">
+            <tr>
+                <td><img src="{{product?.imageUrl}}" class="product-thumb" alt="asd" height="100px" width="100px"></td>
+                <td>{{product?.name}}</td>
+                <td>{{product?.description}}</td>
+                <td>{{product?.price}}</td>
+            </tr>
+        </tbody>
+        <tbody>
+            
+            <tr>
+                <td></td>
+                <td></td>
+                <td>Grand Total</td>
+                <td>{{cartSum}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

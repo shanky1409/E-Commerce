@@ -1,0 +1,29 @@
+<div class='body'>
+    <div class="center">
+        <p class='appname'>E-Com Application</p>
+    </div>
+    <div *ngIf="!isValidUsername">
+    <div class="login-page">
+        <div class="form">
+            <div *ngIf="!isValidUsername">
+                <label>Sign up</label>
+                <div class="login-form">
+                    <input type="text" [(ngModel)]='email' placeholder="email" name="loginUsername"
+                        id="loginUsername" />
+                    <input type="password" [(ngModel)]='password' placeholder="password" name="loginPassword"
+                        id="loginPassword" />
+                    <button (click)='signup()' name="loginBtn" id="loginBtn">Sign up</button>
+                    <button (click)='onReset()'>Reset</button>
+                    <p class="errorMessage">{{message}}</p>
+                </div>
+                <div>
+                    <p>Already have an account? <a href="/login">Login</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div *ngIf="isValidUsername">
+    <app-customer [email] = "email"></app-customer>
+</div>

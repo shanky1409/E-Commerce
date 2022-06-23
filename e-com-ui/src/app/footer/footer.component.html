@@ -1,0 +1,5 @@
+<div class="topnav">
+    <div ><a *ngIf="pageInfo.hasNextPage" (click)="getNextPage()">Next</a></div>
+    <label>Showing {{pageInfo.currentPage}} of {{pageInfo.totalPage}}</label>
+    <a *ngIf="pageInfo.currentPage>1;" (click)="getPreviousPage()">Previous</a>
+</div>
