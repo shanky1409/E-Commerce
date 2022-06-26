@@ -1,0 +1,16 @@
+server:
+  port: 8082
+spring:
+  mail:
+    host: smtp.gmail.com
+    password: wxeqhfceowumuaej
+    port: 587
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+    username: shanky1409@gmail.com
+  profiles:
+    active: prod

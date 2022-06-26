@@ -1,6 +1,7 @@
 package com.practice.spring.ecom.customer.services.mails;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -8,18 +9,18 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.practice.spring.ecom.customer.models.Customer;
 import com.practice.spring.ecom.customer.models.Mail;
 import com.practice.spring.ecom.customer.utils.EComUtils;
 
 
 @Service
 @Async
-public class MailServiceCustomerImpl implements MailService<Customer> {
+public class MailServiceCustomerImpl implements MailService {
 
-	private String url = "http://localhost:8082/mail";
 	private HttpHeaders httpHeaders;
 	private final RestTemplate restTemplate;
+	@Value("{ecom.mailservice.url}")
+	private String mailServiceUrl;
 	
 	@Autowired
 	public MailServiceCustomerImpl(HttpHeaders httpHeaders, RestTemplate restTemplate) {
@@ -29,14 +30,14 @@ public class MailServiceCustomerImpl implements MailService<Customer> {
 
 
 	@Override
-	public void sendMail(Customer customer, String operation) {
-		String to= customer.getEmail();
+	public void sendMail(String to, String operation) {
 		String subject = getSubject(operation);
-		String messageBody= getMessageBody(customer, operation);
+		String messageBody= getMessageBody(to, operation);
 		httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 		Mail mail = new Mail(to,subject,messageBody);
 		HttpEntity<Mail> entity = new HttpEntity<Mail>(mail, httpHeaders);
-		String reponse= this.restTemplate.postForObject(url, entity, String.class);
+		System.out.println(mail);
+		String reponse= this.restTemplate.postForObject(mailServiceUrl, entity, String.class);
 		System.out.println(reponse);
 	}
 
@@ -56,31 +57,21 @@ public class MailServiceCustomerImpl implements MailService<Customer> {
 	}
 
 
-	private String getMessageBody(Customer customer, String operation) {
+	private String getMessageBody(String email, String operation) {
 		
 		String messageBody="";
 		if(operation.equals(EComUtils.NEW)) {
-			messageBody+="Dear "+customer.getFirstName()+
-					"<br><br> Your account is created for E-Com application.<br>"
-					+ "Please confirm your details."
-					+ "<br>Name: "+customer.getFirstName()+" "+customer.getLastName()
-					+ "<br>Email "+customer.getEmail()
-					+ "<br>Phone Number: "+ customer.getPhoneNumber()
-					+ "<br>Address: "+ customer.getAddress()
+			messageBody+="Dear "+email+
+					",<br><br> Your account is created for E-Com application.<br>"
 					+ "<br><br>Regards,<br>E-Com";
 		}
 		else if(operation.equals(EComUtils.UPDATE)) {
-			messageBody+="Dear "+customer.getFirstName()+
-					"<br><br> Your E-Com account has been updated successfully.<br>"
-					+ "Please confirm your details."
-					+ "<br>Name: "+customer.getFirstName()+" "+customer.getLastName()
-					+ "<br>Email "+customer.getEmail()
-					+ "<br>Phone Number: "+ customer.getPhoneNumber()
-					+ "<br>Address: "+ customer.getAddress()
+			messageBody+="Dear "+email+
+					",<br><br> Your E-Com account has been updated successfully.<br>"
 					+ "<br><br>Regards,<br>E-Com";
 		}
 		else if(operation.equals(EComUtils.DELETE)) {
-			messageBody+="Dear "+customer.getFirstName()+
+			messageBody+="Dear "+email+
 					"<br><br> Your E-Com account has been removed.<br>"
 					+ "<br><br>Regards,<br>E-Com";
 		}
