@@ -8,11 +8,9 @@ import org.springframework.stereotype.Component;
 import com.test.spring.mailservice.models.Mail;
 
 @Component
-@Profile("dev")
 public class MockMailer implements IMailer {
 
 	private static Logger log = LogManager.getLogger(MockMailer.class);
-	@Override
 	public String send(Mail mail) {
 		
 		log.debug("Entered "+this.getClass());

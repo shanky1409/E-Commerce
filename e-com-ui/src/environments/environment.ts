@@ -4,10 +4,15 @@
 
 export const environment = {
   production: false,
-  customerLoginBaseUrl:"http://localhost:5005/customer-login/",
-  customerBaseUrl:"http://localhost:5005/customer/",
-  productService: "http://localhost:5050/products/",
-  cartService: "http://localhost:5051/cart/"
+  // customerLoginBaseUrl:"http://localhost:5005/customer-login/",
+  // customerBaseUrl:"http://localhost:5005/customer/",
+  // productService: "http://localhost:5050/products/",
+  // cartService: "http://localhost:5051/cart/"
+
+  customerLoginBaseUrl:"http://54.175.163.72:5005/customer-login/",
+  customerBaseUrl:"http://54.175.163.72:5005/customer/",
+  productService: "http://54.175.163.72:5050/products/",
+  cartService: "http://54.175.163.72:5051/cart/"
 };
 
 /*

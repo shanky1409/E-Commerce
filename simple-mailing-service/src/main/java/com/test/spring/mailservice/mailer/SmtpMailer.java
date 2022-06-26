@@ -6,6 +6,7 @@ import javax.mail.internet.MimeMessage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.mail.MailAuthenticationException;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -16,7 +17,8 @@ import org.springframework.stereotype.Component;
 import com.test.spring.mailservice.models.Mail;
 
 @Component
-@Profile("prod")
+@Primary
+@Async
 public class SmtpMailer implements IMailer{
 	
 	JavaMailSender mailSender;
@@ -27,7 +29,6 @@ public class SmtpMailer implements IMailer{
 	}
 
 	private static Logger log = LogManager.getLogger(SmtpMailer.class);
-	@Override
 	public String send(Mail mail) {
 		
 		log.debug("Entered "+this.getClass());
