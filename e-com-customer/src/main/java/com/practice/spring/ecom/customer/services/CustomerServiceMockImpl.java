@@ -18,10 +18,10 @@ import com.practice.spring.ecom.customer.utils.EComUtils;
 public class CustomerServiceMockImpl implements CustomerService {
 
 	private Map<UUID,Customer> customers;
-	private MailService<Customer> mailService;
+	private MailService mailService;
 	
 	@Autowired
-	public CustomerServiceMockImpl(MailService<Customer> mailService) {
+	public CustomerServiceMockImpl(MailService mailService) {
 		loadAddCustomers();
 		this.mailService= mailService;
 	}
@@ -67,14 +67,14 @@ public class CustomerServiceMockImpl implements CustomerService {
 		if(customer !=null) {
 			if(customers.containsKey(customer.getId())) {
 				customers.put(customer.getId(), customer);
-				mailService.sendMail(customer, EComUtils.UPDATE);
+				mailService.sendMail(customer.getEmail(), EComUtils.UPDATE);
 			}
 			else {
 				System.out.println(customer.getAddress());
 				UUID uuid = UUID.randomUUID();
 				customer.setId(uuid);
 				customers.put(uuid, customer);
-				mailService.sendMail(customer, EComUtils.NEW);
+				mailService.sendMail(customer.getEmail(), EComUtils.NEW);
 			}
 			return customer;
 		}
@@ -85,7 +85,7 @@ public class CustomerServiceMockImpl implements CustomerService {
 	@Override
 	public void deleteCustomer(UUID id) {
 		Customer customer =customers.remove(id);
-		mailService.sendMail(customer,EComUtils.DELETE);
+		mailService.sendMail(customer.getEmail(),EComUtils.DELETE);
 	}
 
 }

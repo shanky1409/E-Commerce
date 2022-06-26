@@ -1,0 +1,78 @@
+version: "3"
+
+services:
+   product-service:
+      image: shanky14/ecom-productservice:1.0.0
+      container_name: ecom-productservice
+      networks:
+        - ecom-network
+      expose:
+        - "5050"
+      ports:
+        - "5050:5050"
+      environment:
+        - ECOM_DATAMANAGER_URL=http://datamanager-service:8084
+   customer-service:
+      image: shanky14/ecom-customerservice:1.0.0
+      container_name: ecom-customerservice
+      networks:
+        - ecom-network
+      expose:
+        - "5005"
+      ports:
+        - "5005:5005"
+      environment:
+        - ECOM_DATAMANAGER_URL=http://datamanager-service:8084
+        - ECOM_MAILSERVICE_URL=http://mail-service/mail:8082
+   cart-service:
+      image: shanky14/ecom-cartservice:1.0.0
+      container_name: ecom-cartservice
+      networks:
+         - ecom-network
+      expose:
+        - "5051"
+      ports:
+        - "5051:5051"
+      environment:
+        - ECOM_DATAMANAGER_URL=http://datamanager-service:8084
+   datamanager-service:
+      image: shanky14/ecom-datamanager:1.0.0
+      container_name: ecom-datamanager
+      networks:
+        - ecom-network
+      expose:
+        - "8084"
+      ports:
+        - "8084:8084"
+      environment:
+        - SPRING_DATASOURCE_USERNAME=root
+        - SPRING_DATASOURCE_URL=jdbc:mysql://ecom-db.cla1q7omdamx.us-east-1.rds.amazonaws.com/ecom
+        - SPRING_DATASOURCE_PASSWORD=MysqlDb1!
+        - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQL8Dialect
+   mail-service:
+      image: shanky14/ecom-mailservice:1.0.0
+      container_name: ecom-mailservice
+      networks:
+        - ecom-network
+      expose:
+        - "8082"
+      ports:
+        - "8082:8082"
+      environment:
+        - SPRING_PROFILES_ACTIVE=prod
+        - SPRING_MAIL_HOST=smtp.gmail.com
+        - SPRING_MAIL_USERNAME=shanky1409@gmail.com
+        - SPRING_MAIL_PASSWORD=wxeqhfceowumuaej
+        - SPRING_MAIL_PORT=587
+        - SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH=true
+        - SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH_STARTTLS_ENABLE=true
+   ui:
+      image: shanky14/ecom-ui:1.0.0
+      container_name: ecom-ui
+      networks:
+        - ecom-network
+      ports:
+      - "4200:80" # Map the exposed port 80 on the container to port 4200 on the host machine
+      restart: always
+networks:
+    ecom-network:

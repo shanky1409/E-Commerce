@@ -1,0 +1,6 @@
+server:
+  port: 5051
+
+ecom:
+  datamanager:
+    url: http://localhost:8084

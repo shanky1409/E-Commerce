@@ -1,5 +1,6 @@
 package com.practice.spring.ecom.cart.utils;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -10,12 +11,12 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class RestClient {
+	@Value("${ecom.datamanager.url}")
 	private String serverUrl;
 	private RestTemplate restTemplate;
 	private HttpHeaders headers;
 	private HttpStatus httpStatus;
 	public RestClient() {
-		this.serverUrl = "http://localhost:8084";
 		this.restTemplate = new RestTemplate();
 		this.headers = new HttpHeaders();
 		headers.add("Content-Type", "application/json");

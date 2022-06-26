@@ -1,0 +1,8 @@
+server:
+  port: 5005
+
+ecom:
+  datamanager:
+    url: http://localhost:8084
+  mailservice:
+    url: http://localhost:8082/mail

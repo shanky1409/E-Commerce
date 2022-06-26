@@ -1,0 +1,15 @@
+server:
+  port: 8084
+spring:
+  datasource:
+    password: MysqlDb1!
+    url: jdbc:mysql://ecom-db.cla1q7omdamx.us-east-1.rds.amazonaws.com/ecom
+    username: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+    show-sql: true
